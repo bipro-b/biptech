@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BipTech | AI agents, RAG and cloud platforms that run in production</title>
+<meta name="description" content="BipTech builds, ships and hands over AI agents, RAG assistants, MVPs and cloud infrastructure for startups and small teams. You own the code, the infrastructure and the documentation.">
+<meta property="og:title" content="BipTech | AI agents, RAG and cloud platforms that run in production">
+<meta property="og:description" content="Fixed-scope AI, full-stack and DevOps projects with security and monitoring built in, handed over with full documentation.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://biptech.dev/">
+<meta name="theme-color" content="#0A1020">
+<link rel="canonical" href="https://biptech.dev/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230A1020'/%3E%3Cpath d='M9 8h8a4 4 0 0 1 0 8H9zm0 8h9a4 4 0 0 1 0 8H9z' fill='none' stroke='%23C9A96E' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"BipTech","url":"https://biptech.dev","email":"hello@biptech.dev","description":"AI agent, RAG and cloud engineering studio.","founder":{"@type":"Person","name":"Bipro Barai"},"address":{"@type":"PostalAddress","addressLocality":"Dhaka","addressCountry":"BD"}}
+</script>
+<style>
+:root{
+  --night:#0A1020; --night-2:#101932; --night-3:#18233F;
+  --ivory:#F7F4EE; --paper:#FCFBF8; --stone:#E7E1D6; --line:#E2DCD0;
+  --ink:#0E1526; --ink-soft:#5A6275; --ink-mute:#8A8F9C;
+  --gold:#C9A96E; --gold-soft:#E4D2A8; --gold-deep:#9C7E45;
+  --on-night:#ECE7DD; --on-night-soft:#A7AEC0; --hair-n:rgba(236,231,221,.12);
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  --wrap:1200px; --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:1.0625rem;line-height:1.65;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:inherit}
+img,svg{display:block}
+.skip{position:absolute;left:-999px;top:0;background:var(--night);color:#fff;padding:.6rem 1rem;z-index:100}
+.skip:focus{left:0}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 2rem}
+h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;letter-spacing:-.015em;font-variation-settings:"opsz" 96}
+h1{font-size:clamp(2.7rem,6vw,5.2rem);line-height:1.02;font-weight:300}
+h2{font-size:clamp(2rem,3.8vw,3.1rem);line-height:1.08;font-weight:300}
+h3{font-size:1.35rem;line-height:1.25}
+em{font-style:italic;color:var(--gold)}
+p{margin:0 0 1rem;max-width:62ch}
+.eyebrow{font-family:var(--sans);font-size:.74rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep);display:flex;align-items:center;gap:.8rem;margin-bottom:1.4rem}
+.eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--sans);font-weight:600;font-size:.95rem;letter-spacing:.01em;text-decoration:none;padding:1rem 1.6rem;border-radius:2px;border:1px solid transparent;transition:all .25s var(--ease);cursor:pointer}
+.btn svg{width:16px;height:16px;transition:transform .25s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+.btn-gold{background:var(--gold);color:var(--night);border-color:var(--gold)}
+.btn-gold:hover{background:var(--gold-soft);border-color:var(--gold-soft)}
+.btn-line{color:var(--on-night);border-color:rgba(236,231,221,.3)}
+.btn-line:hover{border-color:var(--gold);color:var(--gold-soft)}
+.btn-dark{background:var(--night);color:var(--ivory);border-color:var(--night)}
+.btn-dark:hover{background:var(--night-3)}
+
+/* header */
+.site{position:fixed;inset:0 0 auto;z-index:50;transition:background .3s,border-color .3s,backdrop-filter .3s;border-bottom:1px solid transparent}
+.site.scrolled{background:rgba(10,16,32,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom-color:var(--hair-n)}
+.site .wrap{display:flex;align-items:center;justify-content:space-between;height:78px}
+.logo{display:flex;align-items:center;gap:.65rem;text-decoration:none;color:var(--ivory)}
+.logo .mark{width:30px;height:30px;border:1px solid var(--gold);display:grid;place-items:center;font-family:var(--serif);color:var(--gold);font-size:1.05rem}
+.logo .word{font-family:var(--serif);font-size:1.35rem;letter-spacing:.01em}
+.logo .word i{font-style:italic;color:var(--gold)}
+nav.main{display:flex;align-items:center;gap:2.2rem}
+nav.main a:not(.btn){font-size:.88rem;font-weight:500;letter-spacing:.04em;text-decoration:none;color:var(--on-night-soft);transition:color .2s;position:relative}
+nav.main a:not(.btn)::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+nav.main a:not(.btn):hover{color:var(--ivory)}
+nav.main a:not(.btn):hover::after{transform:scaleX(1)}
+nav.main .btn{padding:.65rem 1.15rem;font-size:.86rem}
+.menu-btn{display:none;background:none;border:1px solid var(--hair-n);color:var(--ivory);width:42px;height:42px;border-radius:2px;cursor:pointer}
+.menu-btn span{display:block;width:18px;height:1px;background:currentColor;margin:5px auto;transition:transform .25s}
+
+/* hero */
+.hero{background:radial-gradient(1200px 600px at 85% 10%,rgba(201,169,110,.10),transparent 60%),radial-gradient(900px 500px at 0% 100%,rgba(60,90,160,.18),transparent 60%),var(--night);color:var(--on-night);padding:10.5rem 0 0;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--hair-n) 1px,transparent 1px),linear-gradient(90deg,var(--hair-n) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse at 70% 30%,#000 10%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at 70% 30%,#000 10%,transparent 70%);opacity:.35;pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:4.5rem;align-items:center;position:relative}
+.hero .eyebrow{color:var(--gold)}
+.hero h1{color:var(--ivory)}
+.hero .lead{font-size:1.18rem;color:var(--on-night-soft);margin:1.8rem 0 2.4rem;max-width:52ch}
+.actions{display:flex;flex-wrap:wrap;gap:.9rem}
+.assure{display:flex;flex-wrap:wrap;gap:.6rem 1.6rem;margin-top:2.6rem;padding:0;list-style:none;font-size:.86rem;color:var(--on-night-soft)}
+.assure li{display:flex;align-items:center;gap:.5rem}
+.assure li::before{content:"";width:5px;height:5px;background:var(--gold);transform:rotate(45deg)}
+
+/* trace */
+.trace-wrap{position:relative}
+.trace{position:relative;border:1px solid transparent;background:linear-gradient(180deg,#121B33,#0D1428) padding-box,linear-gradient(140deg,rgba(201,169,110,.6),rgba(201,169,110,0) 40%,rgba(201,169,110,0) 70%,rgba(201,169,110,.35)) border-box;border-radius:6px;padding:1.4rem 1.5rem 1.1rem;font-family:var(--mono);font-size:.76rem;color:#DDE3EE;box-shadow:0 40px 80px -30px rgba(0,0,0,.6)}
+.trace .bar{display:flex;justify-content:space-between;align-items:center;gap:1rem;color:var(--on-night-soft);padding-bottom:1rem;border-bottom:1px solid var(--hair-n);margin-bottom:.5rem}
+.trace .bar b{color:var(--ivory);font-weight:400;display:flex;align-items:center;gap:.55rem}
+.trace .bar b::before{content:"";width:7px;height:7px;border-radius:50%;background:#6FCF97;box-shadow:0 0 0 3px rgba(111,207,151,.15)}
+.trace ol{list-style:none;margin:0;padding:0}
+.row{display:grid;grid-template-columns:8.4rem 1fr 3.8rem;grid-template-areas:"n t m" ". note note";align-items:center;column-gap:.8rem;padding:.42rem 0}
+.row .name{grid-area:n;color:var(--ivory);white-space:nowrap}
+.row .track{grid-area:t;position:relative;height:6px;background:rgba(255,255,255,.05);border-radius:1px}
+.row .ms{grid-area:m;text-align:right;color:var(--on-night-soft)}
+.row .note{grid-area:note;color:#7C869C;font-size:.68rem;line-height:1.2;padding-top:.15rem}
+.span{position:absolute;top:0;bottom:0;left:var(--s);width:var(--w);min-width:3px;background:#8FA3C8;border-radius:1px;transform-origin:left;animation:grow .7s var(--ease) both;animation-delay:calc(var(--i)*.14s + .4s)}
+.span.slow{background:linear-gradient(90deg,var(--gold-deep),var(--gold-soft))}
+@keyframes grow{from{transform:scaleX(0);opacity:.2}to{transform:scaleX(1);opacity:1}}
+.trace .foot{display:flex;justify-content:space-between;gap:1rem;color:var(--on-night-soft);border-top:1px solid var(--hair-n);margin-top:.6rem;padding-top:.9rem;font-size:.7rem}
+.trace .foot span:last-child{color:var(--gold-soft)}
+.trace-cap{font-size:.82rem;color:#7C869C;margin:1rem .2rem 0;max-width:none}
+
+/* figures band */
+.figures{position:relative;margin-top:6rem;border-top:1px solid var(--hair-n);display:grid;grid-template-columns:repeat(4,1fr)}
+.figures div{padding:2.2rem 1.8rem 2.6rem 0}
+.figures div+div{padding-left:1.8rem;border-left:1px solid var(--hair-n)}
+.figures strong{display:block;font-family:var(--serif);font-weight:300;font-size:2.6rem;line-height:1;color:var(--ivory);margin-bottom:.6rem}
+.figures strong small{font-size:1rem;color:var(--gold);margin-left:.25rem;font-style:italic}
+.figures span{font-size:.88rem;color:var(--on-night-soft);display:block;max-width:24ch}
+
+/* sections */
+section{padding:7.5rem 0}
+.sec-head{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:end;margin-bottom:4rem}
+.sec-head p{color:var(--ink-soft);margin:0;font-size:1.08rem}
+.ivory{background:var(--ivory)}
+
+/* services */
+.offers{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.offer{display:grid;grid-template-columns:4.5rem 1.1fr 1.6fr 10rem;gap:2rem;padding:2.2rem 1rem;border-bottom:1px solid var(--line);align-items:baseline;transition:background .3s var(--ease),padding .3s var(--ease)}
+.offer:hover{background:var(--ivory);padding-left:1.6rem}
+.offer .num{font-family:var(--serif);font-style:italic;color:var(--gold-deep);font-size:1.05rem}
+.offer h3{font-size:1.55rem;font-weight:300}
+.offer p{margin:0;color:var(--ink-soft)}
+.offer .when{text-align:right;font-weight:600;font-size:.95rem}
+.offer .when small{display:block;font-weight:500;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-deep);margin-top:.25rem}
+.retainer{margin-top:2.5rem;display:flex;justify-content:space-between;align-items:center;gap:2rem;padding:1.8rem 2rem;background:var(--night);color:var(--on-night)}
+.retainer p{margin:0;color:var(--on-night-soft)}
+.retainer strong{font-family:var(--serif);font-weight:400;font-size:1.3rem;color:var(--ivory);display:block;margin-bottom:.2rem}
+
+/* process */
+.steps{counter-reset:s;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);position:relative}
+.steps::before{content:"";position:absolute;top:7px;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--gold),var(--line))}
+.steps li{counter-increment:s;padding:2.4rem 1.6rem 0 0;position:relative}
+.steps li::before{content:"";position:absolute;top:2px;left:0;width:11px;height:11px;border:1px solid var(--gold);background:var(--ivory);transform:rotate(45deg)}
+.steps li::after{content:"0" counter(s);position:absolute;top:2.4rem;right:1.6rem;font-family:var(--serif);font-style:italic;color:var(--gold-deep);font-size:.95rem}
+.steps h3{font-size:1.5rem;font-weight:300;margin-bottom:.7rem}
+.steps p{font-size:.95rem;color:var(--ink-soft);margin:0}
+
+/* handover */
+.split{display:grid;grid-template-columns:1.1fr 1fr;gap:4rem;align-items:start}
+.principles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:2.6rem}
+.principles div{background:var(--paper);padding:1.8rem 1.6rem}
+.principles .ico{width:36px;height:36px;border:1px solid var(--gold);display:grid;place-items:center;margin-bottom:1.1rem;color:var(--gold-deep)}
+.principles .ico svg{width:18px;height:18px}
+.principles h3{font-size:1.2rem;margin-bottom:.4rem}
+.principles p{font-size:.93rem;color:var(--ink-soft);margin:0}
+.receive{background:var(--night);color:var(--on-night);padding:3rem 2.6rem;position:relative}
+.receive::before{content:"";position:absolute;inset:12px;border:1px solid rgba(201,169,110,.25);pointer-events:none}
+.receive h3{font-size:1.9rem;font-weight:300;color:var(--ivory);margin-bottom:1.6rem}
+.receive ul{list-style:none;margin:0;padding:0}
+.receive li{display:flex;gap:1rem;padding:.95rem 0;border-top:1px solid var(--hair-n);color:var(--on-night-soft);font-size:.98rem}
+.receive li svg{flex:none;width:18px;height:18px;color:var(--gold);margin-top:.2rem}
+.receive li b{color:var(--ivory);font-weight:500}
+
+/* work */
+.work{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.work article{background:var(--paper);border:1px solid var(--line);padding:2.2rem 2rem 2rem;display:flex;flex-direction:column;transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s}
+.work article:hover{transform:translateY(-4px);box-shadow:0 30px 60px -35px rgba(10,16,32,.35);border-color:var(--gold-soft)}
+.work .tag{font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:1.2rem}
+.work h3{font-size:1.5rem;font-weight:300;margin-bottom:.9rem}
+.work p{color:var(--ink-soft);font-size:.97rem;flex:1}
+.work a{display:inline-flex;align-items:center;gap:.5rem;font-weight:600;font-size:.92rem;text-decoration:none;margin-top:1rem;color:var(--ink);border-bottom:1px solid var(--gold);padding-bottom:.2rem;align-self:flex-start}
+.work a svg{width:14px;height:14px;transition:transform .25s}
+.work a:hover svg{transform:translateX(3px)}
+
+/* founder + stack */
+.founder{display:grid;grid-template-columns:1fr 1.2fr;gap:4rem;align-items:start}
+.founder blockquote{margin:0;font-family:var(--serif);font-weight:300;font-size:clamp(1.6rem,2.6vw,2.2rem);line-height:1.3;color:var(--ink)}
+.founder blockquote::before{content:"\201C";display:block;font-size:4rem;line-height:.6;color:var(--gold);margin-bottom:.6rem}
+.sig{margin-top:1.8rem;display:flex;align-items:center;gap:1rem}
+.sig .mono{width:48px;height:48px;border-radius:50%;background:var(--night);color:var(--gold);display:grid;place-items:center;font-family:var(--serif);font-size:1.1rem}
+.sig b{display:block;font-weight:600}
+.sig span{font-size:.88rem;color:var(--ink-soft)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem}
+.chips span{font-family:var(--mono);font-size:.78rem;padding:.45rem .75rem;border:1px solid var(--line);background:var(--paper);color:var(--ink-soft)}
+.chip-group+.chip-group{margin-top:1.8rem}
+.chip-group h3{font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep)}
+
+/* faq */
+.faq{border-top:1px solid var(--ink);max-width:900px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:2rem;padding:1.6rem 0;font-family:var(--serif);font-size:1.3rem;font-weight:400}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary i{flex:none;width:28px;height:28px;border:1px solid var(--gold);position:relative;transition:transform .3s var(--ease)}
+.faq summary i::before,.faq summary i::after{content:"";position:absolute;left:50%;top:50%;width:10px;height:1px;background:var(--gold-deep);transform:translate(-50%,-50%)}
+.faq summary i::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .3s var(--ease)}
+.faq details[open] summary i::after{transform:translate(-50%,-50%) rotate(0)}
+.faq details p{color:var(--ink-soft);padding:0 3rem 1.6rem 0;margin:0}
+
+/* cta */
+.cta-sec{background:var(--night);color:var(--on-night);padding:7rem 0;position:relative;overflow:hidden}
+.cta-sec::before{content:"";position:absolute;width:700px;height:700px;right:-200px;top:-300px;background:radial-gradient(circle,rgba(201,169,110,.16),transparent 65%)}
+.cta{position:relative;display:grid;grid-template-columns:1.4fr 1fr;gap:4rem;align-items:end}
+.cta h2{color:var(--ivory);font-size:clamp(2.2rem,4.4vw,3.8rem)}
+.cta p{color:var(--on-night-soft);margin:1.4rem 0 0;font-size:1.1rem}
+.cta-box{border:1px solid var(--hair-n);padding:2rem}
+.cta-box .btn{width:100%;justify-content:center}
+.cta-box .mail{display:flex;justify-content:space-between;align-items:center;margin-top:1.4rem;padding-top:1.4rem;border-top:1px solid var(--hair-n);text-decoration:none;color:var(--on-night-soft);font-size:.92rem}
+.cta-box .mail b{color:var(--ivory);font-weight:500}
+.cta-box .mail:hover b{color:var(--gold-soft)}
+
+footer{background:var(--night);color:var(--on-night-soft);border-top:1px solid var(--hair-n);font-size:.86rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;padding-top:1.8rem;padding-bottom:2.2rem}
+footer a{color:var(--on-night-soft);text-decoration:none;margin-left:1.6rem}
+footer a:hover{color:var(--gold-soft)}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:1000px){
+  .hero-grid,.split,.founder,.cta,.sec-head{grid-template-columns:1fr;gap:2.8rem}
+  .hero{padding-top:8rem}
+  .figures{grid-template-columns:1fr 1fr;margin-top:4rem}
+  .figures div:nth-child(3){padding-left:0;border-left:0}
+  .figures div:nth-child(n+3){border-top:1px solid var(--hair-n)}
+  .steps{grid-template-columns:1fr;gap:0}
+  .steps::before{top:0;bottom:0;left:5px;right:auto;width:1px;height:auto;background:linear-gradient(180deg,var(--gold),var(--line))}
+  .steps li{padding:0 0 2.2rem 2.6rem}
+  .steps li::before{top:.45rem;left:0}
+  .steps li::after{top:.2rem;right:0}
+  .offer{grid-template-columns:1fr;gap:.5rem;padding:1.8rem 0}
+  .offer:hover{padding-left:0;background:none}
+  .offer .when{text-align:left;margin-top:.6rem}
+  .work{grid-template-columns:1fr}
+  .retainer{flex-direction:column;align-items:flex-start}
+  section{padding:5.5rem 0}
+  .sec-head{margin-bottom:2.6rem}
+  .menu-btn{display:block}
+  nav.main{position:fixed;inset:78px 0 auto;flex-direction:column;align-items:stretch;gap:0;background:var(--night);border-bottom:1px solid var(--hair-n);padding:.6rem 2rem 1.6rem;transform:translateY(-8px);opacity:0;visibility:hidden;transition:all .25s var(--ease)}
+  nav.main a:not(.btn){padding:1rem 0;border-bottom:1px solid var(--hair-n);font-size:1rem}
+  nav.main a:not(.btn)::after{display:none}
+  nav.main .btn{margin-top:1.2rem;justify-content:center;padding:.9rem}
+  .site.open nav.main{transform:none;opacity:1;visibility:visible}
+  .site.open{background:var(--night)}
+  .site.open .menu-btn span:first-child{transform:translateY(3px) rotate(45deg)}
+  .site.open .menu-btn span:last-child{transform:translateY(-3px) rotate(-45deg)}
+}
+@media (max-width:560px){
+  .wrap{padding:0 1.25rem}
+  .principles{grid-template-columns:1fr}
+  .figures{grid-template-columns:1fr}
+  .figures div,.figures div+div{padding:1.6rem 0;border-left:0}
+  .figures div+div{border-top:1px solid var(--hair-n)}
+  .row{grid-template-columns:6.6rem 1fr 3.3rem}
+  .trace{font-size:.7rem;padding:1.1rem}
+  .receive{padding:2.4rem 1.6rem}
+  .faq details p{padding-right:0}
+  footer a{margin:0 1.2rem 0 0}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .span{animation:none}
+  .reveal{opacity:1;transform:none;transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site" id="top">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="BipTech home"><span class="mark">B</span><span class="word">Bip<i>Tech</i></span></a>
+    <button class="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><span></span><span></span></button>
+    <nav class="main" id="nav" aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#handover">Handover</a>
+      <a href="#work">Work</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-gold" href="BOOKING_URL">Book a call</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">AI · Cloud · Product engineering</div>
+          <h1>AI agents and cloud platforms, <em>built to run</em> in production.</h1>
+          <p class="lead">BipTech builds, ships and hands over software for startups and small teams. You own the code, the infrastructure and the documentation.</p>
+          <div class="actions">
+            <a class="btn btn-gold" href="BOOKING_URL">Book a 20-minute call <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            <a class="btn btn-line" href="#process">See how we deliver</a>
+          </div>
+          <ul class="assure">
+            <li>Fixed scope and price</li>
+            <li>Code in your repository</li>
+            <li>Monitoring from day one</li>
+          </ul>
+        </div>
+
+        <div class="trace-wrap">
+          <div class="trace" role="img" aria-label="Example request trace of a BipTech RAG assistant answering a question in 1.84 seconds across seven steps">
+            <div class="bar"><b>POST /v1/assistant/ask</b><span>1.84 s total</span></div>
+            <ol>
+              <li class="row"><span class="name">gateway</span><span class="track" aria-hidden="true"><span class="span" style="--s:0.00%;--w:0.76%;--i:0"></span></span><span class="ms">14 ms</span><span class="note">rate limit, auth</span></li>
+              <li class="row"><span class="name">auth.verify</span><span class="track" aria-hidden="true"><span class="span" style="--s:0.76%;--w:0.98%;--i:1"></span></span><span class="ms">18 ms</span><span class="note">JWT check</span></li>
+              <li class="row"><span class="name">retrieve.hybrid</span><span class="track" aria-hidden="true"><span class="span" style="--s:1.74%;--w:11.41%;--i:2"></span></span><span class="ms">210 ms</span><span class="note">keyword + vector search</span></li>
+              <li class="row"><span class="name">rerank</span><span class="track" aria-hidden="true"><span class="span" style="--s:13.15%;--w:7.61%;--i:3"></span></span><span class="ms">140 ms</span><span class="note">top 5 of 40 passages</span></li>
+              <li class="row"><span class="name">llm.generate</span><span class="track" aria-hidden="true"><span class="span slow" style="--s:20.76%;--w:64.13%;--i:4"></span></span><span class="ms">1180 ms</span><span class="note">grounded answer, streamed</span></li>
+              <li class="row"><span class="name">guardrails</span><span class="track" aria-hidden="true"><span class="span" style="--s:84.89%;--w:3.80%;--i:5"></span></span><span class="ms">70 ms</span><span class="note">PII and policy check</span></li>
+              <li class="row"><span class="name">respond</span><span class="track" aria-hidden="true"><span class="span" style="--s:88.70%;--w:11.30%;--i:6"></span></span><span class="ms">208 ms</span><span class="note">answer + 3 citations</span></li>
+            </ol>
+            <div class="foot"><span>3 sources cited</span><span>0.4 cents per answer</span></div>
+          </div>
+          <p class="trace-cap">Illustrative trace from a typical RAG assistant. Every system we ship has tracing, logs and alerts from the first deploy.</p>
+        </div>
+      </div>
+
+      <div class="figures">
+        <div><strong>2<small>weeks</small></strong><span>Between working demos, on every project</span></div>
+        <div><strong>100<small>%</small></strong><span>Of code, infrastructure and documentation owned by you</span></div>
+        <div><strong>5<small>stages</small></strong><span>Each closed with a written exit check</span></div>
+        <div><strong>Day 1</strong><span>Tracing, logs, alerts and security scans in place</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div><div class="eyebrow">Services</div><h2>Five engagements, <em>clearly scoped.</em></h2></div>
+        <p>Fixed scope, fixed timeline, a working demo every two weeks. Start with a small project and grow it once it has shown its value.</p>
+      </div>
+      <ul class="offers reveal">
+        <li class="offer"><span class="num">i.</span><h3>AI agent and support bot</h3><p>Automate one support or operations workflow with an agent that works with your tools. Includes evaluation tests, guardrails and monitoring.</p><div class="when">2 to 4 weeks<small>Fixed price</small></div></li>
+        <li class="offer"><span class="num">ii.</span><h3>RAG knowledge assistant</h3><p>Cited answers from your own documents, in English and Bangla, with a way to measure answer quality before and after launch.</p><div class="when">3 to 5 weeks<small>Fixed price</small></div></li>
+        <li class="offer"><span class="num">iii.</span><h3>MVP build</h3><p>Web product on Next.js, Node.js and PostgreSQL, deployed through an automated pipeline and shipped in two-week sprints.</p><div class="when">6 to 10 weeks<small>Milestone pricing</small></div></li>
+        <li class="offer"><span class="num">iv.</span><h3>Cloud and DevOps audit</h3><p>Lower your AWS bill, add CI/CD, harden Kubernetes and fix the release process. You get a prioritised plan, then we implement what you choose.</p><div class="when">1 to 3 weeks<small>Fixed price</small></div></li>
+        <li class="offer"><span class="num">v.</span><h3>AI discovery workshop</h3><p>One week to rank your AI ideas by return and effort, and leave with a scoped plan and estimate.</p><div class="when">1 week<small>Fixed price</small></div></li>
+      </ul>
+      <div class="retainer reveal">
+        <div><strong>Monthly retainer</strong><p>Ongoing product, AI and DevOps capacity once your first project is live.</p></div>
+        <a class="btn btn-gold" href="BOOKING_URL">Discuss a retainer <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process" class="ivory">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div><div class="eyebrow">Process</div><h2>How a project runs, <em>every time.</em></h2></div>
+        <p>The same five stages, each with a written exit check, so you always know where the project stands and what comes next.</p>
+      </div>
+      <ol class="steps reveal">
+        <li><h3>Scope</h3><p>Discovery call, written scope, estimate, signed agreement.</p></li>
+        <li><h3>Design</h3><p>Architecture, data model, threat model and a plan you approve.</p></li>
+        <li><h3>Build</h3><p>Two-week sprints. CI/CD from day one. A demo after each sprint.</p></li>
+        <li><h3>Harden</h3><p>Acceptance testing, security scans, load tests, rollback rehearsal.</p></li>
+        <li><h3>Hand over</h3><p>Go-live, documentation, training and transfer of access.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- HANDOVER -->
+  <section id="handover">
+    <div class="wrap split">
+      <div class="reveal">
+        <div class="eyebrow">Standards</div>
+        <h2>Built to run <em>without us.</em></h2>
+        <p style="color:var(--ink-soft);margin-top:1.2rem">We design every project so your team, or the next vendor, can take it over on day one.</p>
+        <div class="principles">
+          <div><span class="ico"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M10 2l6 2.5v5c0 4-2.7 6.8-6 8.5-3.3-1.7-6-4.5-6-8.5v-5z"/><path d="M7.5 10l2 2 3.5-4"/></svg></span><h3>Secure by default</h3><p>Dependency, code and container scans in every pipeline. Secrets in a vault, never in the repository.</p></div>
+          <div><span class="ico"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 14l4-5 4 3 4-6 4 4"/><path d="M2 18h16"/></svg></span><h3>Observable</h3><p>Logs, metrics, traces and alerts, with a runbook for each alert.</p></div>
+          <div><span class="ico"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="10" cy="10" r="7.5"/><path d="M12.5 7.2c-.5-.8-1.4-1.2-2.5-1.2-1.4 0-2.5.8-2.5 2s1.1 1.7 2.5 2 2.5.8 2.5 2-1.1 2-2.5 2c-1.1 0-2-.4-2.5-1.2M10 4.5V6M10 14v1.5"/></svg></span><h3>Cost-aware</h3><p>Budget alerts and a monthly running-cost sheet from the first deployment.</p></div>
+          <div><span class="ico"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="14" height="14"/><path d="M6.5 10l2.5 2.5 4.5-5"/></svg></span><h3>Tested</h3><p>Automated tests and, for AI features, an evaluation set that checks answer quality on every change.</p></div>
+        </div>
+      </div>
+      <div class="receive reveal">
+        <div class="eyebrow" style="color:var(--gold)">At handover</div>
+        <h3>What you receive</h3>
+        <ul>
+          <li><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 9.5l3 3 7-7"/></svg><span><b>All source code</b>, in your own repository</span></li>
+          <li><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 9.5l3 3 7-7"/></svg><span><b>Infrastructure as code</b> and deployment pipelines</span></li>
+          <li><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 9.5l3 3 7-7"/></svg><span><b>Architecture diagrams</b> and decision records</span></li>
+          <li><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 9.5l3 3 7-7"/></svg><span><b>API documentation</b> and runbooks</span></li>
+          <li><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 9.5l3 3 7-7"/></svg><span><b>Test and security reports</b></span></li>
+          <li><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 9.5l3 3 7-7"/></svg><span><b>Cloud accounts, domains and credentials</b>, rotated and transferred to you</span></li>
+          <li><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 9.5l3 3 7-7"/></svg><span><b>Team training</b> and a warranty period for defects</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work" class="ivory">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div><div class="eyebrow">Reference builds</div><h2>Our approach, <em>in working systems.</em></h2></div>
+        <p>Systems we built to show how we work. Client case studies are added here as projects are approved for publication.</p>
+      </div>
+      <div class="work">
+        <article class="reveal"><div class="tag">Agentic AI · AWS</div><h3>Agentic operations assistant</h3><p>A multi-step assistant that reads requests, calls business tools and asks for approval before risky actions. Runs on AWS with full tracing.</p><a href="DEMO_URL_1">Open the demo <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></article>
+        <article class="reveal"><div class="tag">RAG · Evaluation</div><h3>Bangla and English RAG benchmark</h3><p>A test set and evaluation pipeline for retrieval quality across both languages, used to tune chunking, search and reranking.</p><a href="DEMO_URL_2">Read the write-up <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></article>
+        <article class="reveal"><div class="tag">DevOps · Kubernetes</div><h3>Kubernetes delivery pipeline</h3><p>A reference setup: GitHub Actions, image scanning, Argo CD and Terraform, deploying to EKS with automatic rollback.</p><a href="https://github.com/bipro-b">View on GitHub <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER + STACK -->
+  <section id="stack">
+    <div class="wrap founder">
+      <div class="reveal">
+        <div class="eyebrow">Leadership</div>
+        <blockquote>If we are not the right fit for your project, we will tell you on the first call.</blockquote>
+        <div class="sig"><span class="mono">BB</span><div><b>Bipro Barai</b><span>Founder and engineer · Dhaka, working across time zones</span></div></div>
+      </div>
+      <div class="reveal">
+        <div class="eyebrow">Tools we use</div>
+        <div class="chip-group"><h3>Application</h3><div class="chips"><span>Node.js</span><span>TypeScript</span><span>React</span><span>Next.js</span><span>Fastify</span><span>PostgreSQL</span><span>MongoDB</span><span>Redis</span></div></div>
+        <div class="chip-group"><h3>AI</h3><div class="chips"><span>LangGraph</span><span>Model Context Protocol</span><span>pgvector</span></div></div>
+        <div class="chip-group"><h3>Cloud, delivery and security</h3><div class="chips"><span>AWS</span><span>EKS</span><span>Docker</span><span>Kubernetes</span><span>Argo CD</span><span>Terraform</span><span>GitHub Actions</span><span>Jenkins</span><span>SonarQube</span><span>Trivy</span><span>OpenTelemetry</span><span>Grafana</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="ivory">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div><div class="eyebrow">Questions</div><h2>Before you <em>book a call.</em></h2></div>
+        <p>Short answers to what clients usually ask first.</p>
+      </div>
+      <div class="faq reveal">
+        <details><summary>Who owns the code and infrastructure?<i aria-hidden="true"></i></summary><p>You do. Code lives in your own repository, infrastructure is defined as code, and cloud accounts, domains and credentials are rotated and transferred to you at handover.</p></details>
+        <details><summary>How is pricing set?<i aria-hidden="true"></i></summary><p>Scoped projects are fixed price. MVP builds use milestone pricing. Ongoing work runs as a monthly retainer. You get a written scope and estimate before anything is signed.</p></details>
+        <details><summary>How will we know how the project is going?<i aria-hidden="true"></i></summary><p>You see a working demo every two weeks, and each of the five stages ends with a written exit check.</p></details>
+        <details><summary>What happens after go-live?<i aria-hidden="true"></i></summary><p>You receive documentation, runbooks and training for your team, plus a warranty period for defects. If you want ongoing help, we can continue on a retainer.</p></details>
+        <details><summary>Do you work with teams outside Bangladesh?<i aria-hidden="true"></i></summary><p>Yes. BipTech is based in Dhaka and works with teams across time zones.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-sec" id="contact">
+    <div class="wrap cta">
+      <div class="reveal">
+        <div class="eyebrow" style="color:var(--gold)">Start a conversation</div>
+        <h2>Tell us what you want to <em>automate or ship.</em></h2>
+        <p>In 20 minutes we will tell you whether we can help, what it would take and roughly what it costs.</p>
+      </div>
+      <div class="cta-box reveal">
+        <a class="btn btn-gold" href="BOOKING_URL">Book a 20-minute call <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        <a class="mail" href="mailto:hello@biptech.dev"><span>Or write to</span><b>hello@biptech.dev</b></a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; <span id="yr">2026</span> BipTech. Dhaka, Bangladesh.</span>
+    <span><a href="#services">Services</a><a href="#faq">FAQ</a><a href="mailto:hello@biptech.dev">Email</a><a href="https://github.com/bipro-b">GitHub</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var h=document.querySelector('.site'),b=document.querySelector('.menu-btn'),n=document.getElementById('nav');
+  function onScroll(){h.classList.toggle('scrolled',window.scrollY>24)}
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+  b.addEventListener('click',function(){var o=h.classList.toggle('open');b.setAttribute('aria-expanded',o);b.setAttribute('aria-label',o?'Close menu':'Open menu')});
+  n.addEventListener('click',function(e){if(e.target.closest('a')){h.classList.remove('open');b.setAttribute('aria-expanded','false')}});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')h.classList.remove('open')});
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>
